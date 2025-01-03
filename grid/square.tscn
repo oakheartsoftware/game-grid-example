@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://dgrqiiw6jsect"]
+
+[ext_resource type="Script" path="res://grid/square.gd" id="1_papxk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vns4h"]
+size = Vector2(64, 64)
+
+[sub_resource type="Gradient" id="Gradient_ryqt6"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.32806, 0.517773, 0.248798, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_v56iq"]
+gradient = SubResource("Gradient_ryqt6")
+
+[sub_resource type="Gradient" id="Gradient_7gb8c"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 0.301961)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vpnyw"]
+gradient = SubResource("Gradient_7gb8c")
+
+[node name="Square" type="Node2D"]
+script = ExtResource("1_papxk")
+
+[node name="ClickableArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(32, 32)
+collision_mask = 0
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickableArea"]
+shape = SubResource("RectangleShape2D_vns4h")
+
+[node name="BaseBackground" type="Sprite2D" parent="."]
+position = Vector2(32, 32)
+texture = SubResource("GradientTexture2D_v56iq")
+
+[node name="PieceSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(32, 32)
+
+[node name="Highlight" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(32, 32)
+texture = SubResource("GradientTexture2D_vpnyw")

@@ -1,0 +1,122 @@
+extends Node2D
+
+
+# Fuck the system, one constant is not caps
+
+const SingleTileScene = preload("res://Scenes/Board/tile.tscn")
+const BEACH_LEECH = preload("res://Scenes/Leeches/Beach_Leech.tscn")
+const BREACH_LEECH = preload("res://Scenes/Leeches/Breach_Leech.tscn")
+const LEECH_LIEGE = preload("res://Scenes/Leeches/Leech_Liege.tscn")
+const PEACH_LEECH = preload("res://Scenes/Leeches/Peach_Leech.tscn")
+const TEACH_LEECH = preload("res://Scenes/Leeches/Teach_Leech.tscn")
+
+@onready var tile_container: Node = $TileContainer
+@onready var board_tiles: GridContainer = $Board_Tiles
+@onready var left_player_hp: RichTextLabel = $UI/Left_Player_HP
+@onready var right_player_hp: RichTextLabel = $UI/Right_Player_HP
+
+#region Creates the Leeches Instances
+var Beach_Leech_Left_1 = BEACH_LEECH.instantiate()
+var Beach_Leech_Left_2 = BEACH_LEECH.instantiate()
+var Beach_Leech_Right_1 = BEACH_LEECH.instantiate()
+var Beach_Leech_Right_2 = BEACH_LEECH.instantiate()
+var Breach_Leech_Left_1 = BREACH_LEECH.instantiate()
+var Breach_Leech_Left_2 = BREACH_LEECH.instantiate()
+var Breach_Leech_Right_1 = BREACH_LEECH.instantiate()
+var Breach_Leech_Right_2 = BREACH_LEECH.instantiate()
+var Leech_Liege_Left = LEECH_LIEGE.instantiate()
+var Leech_Liege_Right = LEECH_LIEGE.instantiate()
+var Peach_Leech_Left = PEACH_LEECH.instantiate()
+var Peach_Leech_Right = PEACH_LEECH.instantiate()
+var Teach_Leech_Left = TEACH_LEECH.instantiate()
+var Teach_Leech_Right = TEACH_LEECH.instantiate()
+#endregion
+
+func _ready() -> void:
+
+	var Tile
+	# Creates the board tiles
+	for i in range(81):
+
+		Tile = SingleTileScene.instantiate()
+		board_tiles.add_child(Tile)
+		board_tiles.get
+		
+	SetStarterLeeches()
+
+func SetStarterLeeches():
+	
+	# Places all of the starting leeches
+
+#region Creating Beach Leeches
+	var BL1 = board_tiles.get_child(18)
+	BL1.add_child(Beach_Leech_Left_1)
+	var BL2 = board_tiles.get_child(54)
+	BL2.add_child(Beach_Leech_Left_2)
+	
+	var BL3 = board_tiles.get_child(26)
+	BL3.add_child(Beach_Leech_Right_1)
+	var BL4 = board_tiles.get_child(62)
+	BL4.add_child(Beach_Leech_Right_2)
+#endregion
+
+#region Creating Breach Leaches
+	var BrL1 = board_tiles.get_child(28)
+	BrL1.add_child(Breach_Leech_Left_1)
+	var BrL2 = board_tiles.get_child(46)
+	BrL2.add_child(Breach_Leech_Left_2)
+	
+	var BrL3 = board_tiles.get_child(34)
+	BrL3.add_child(Breach_Leech_Right_1)
+	var BrL4 = board_tiles.get_child(52)
+	BrL4.add_child(Breach_Leech_Right_2)
+#endregion
+
+#region Creating Leech Lieges
+	var LL_L = board_tiles.get_child(27)
+	LL_L.add_child(Leech_Liege_Left)
+	var LL_R = board_tiles.get_child(35)
+	LL_R.add_child(Leech_Liege_Right)
+#endregion
+
+#region Creating Peach Leeches
+	var PL_L = board_tiles.get_child(36)
+	PL_L.add_child(Peach_Leech_Left)
+	var PL_R = board_tiles.get_child(44)
+	PL_R.add_child(Peach_Leech_Right)
+#endregion
+
+#region Creating Teach Leeches
+	var TL_L = board_tiles.get_child(45)
+	TL_L.add_child(Teach_Leech_Left)
+	var TL_R = board_tiles.get_child(53)
+	TL_R.add_child(Teach_Leech_Right)
+#endregion
+
+	# Sets all of the leeches HP on text
+	
+	# Left Player
+	Set_Left_Player_Text()
+	
+	# Right Player
+	Set_Right_Player_Text()
+
+func Set_Left_Player_Text():
+	left_player_hp.clear()
+	left_player_hp.append_text("Beach Leech 1: " + str(Beach_Leech_Left_1.stats.HP) + "\n")
+	left_player_hp.append_text("Beach Leech 2: " + str(Beach_Leech_Left_2.stats.HP) + "\n")
+	left_player_hp.append_text("Breach Leech 1: " + str(Breach_Leech_Left_1.stats.HP) + "\n")
+	left_player_hp.append_text("Breach Leech 2: " + str(Breach_Leech_Left_2.stats.HP) + "\n")
+	left_player_hp.append_text("Leech Liege 1: " + str(Leech_Liege_Left.stats.HP) + "\n")
+	left_player_hp.append_text("Peach Leech 2: " + str(Peach_Leech_Left.stats.HP) + "\n")
+	left_player_hp.append_text("Teach Leech 2: " + str(Teach_Leech_Left.stats.HP))
+	
+func Set_Right_Player_Text():
+	right_player_hp.clear()
+	right_player_hp.append_text("Beach Leech 1: " + str(Beach_Leech_Right_1.stats.HP) + "\n")
+	right_player_hp.append_text("Beach Leech 2: " + str(Beach_Leech_Right_2.stats.HP) + "\n")
+	right_player_hp.append_text("Breach Leech 1: " + str(Breach_Leech_Right_1.stats.HP) + "\n")
+	right_player_hp.append_text("Breach Leech 2: " + str(Breach_Leech_Right_2.stats.HP) + "\n")
+	right_player_hp.append_text("Leech Liege 1: " + str(Leech_Liege_Right.stats.HP) + "\n")
+	right_player_hp.append_text("Peach Leech 2: " + str(Peach_Leech_Right.stats.HP) + "\n")
+	right_player_hp.append_text("Teach Leech 2: " + str(Teach_Leech_Right.stats.HP))

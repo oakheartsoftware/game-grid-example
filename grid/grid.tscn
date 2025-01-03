@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://7jdyng4fllpb"]
+
+[ext_resource type="Script" path="res://grid/grid.gd" id="1_3n7bk"]
+[ext_resource type="Texture2D" uid="uid://d3o2hjjej03l4" path="res://assest-creation/chunky_leech.png" id="2_jkjg7"]
+[ext_resource type="Texture2D" uid="uid://ovqq5cd5roo2" path="res://assest-creation/pawn_leech.png" id="3_cscau"]
+
+[node name="Grid" type="Node2D"]
+script = ExtResource("1_3n7bk")
+chunky_leech = ExtResource("2_jkjg7")
+pawn_leech = ExtResource("3_cscau")
