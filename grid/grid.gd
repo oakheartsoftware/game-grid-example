@@ -78,7 +78,8 @@ func _handle_clicked_square(square: Square, grid_position: Vector2i) -> void:
 		
 		if square.occupied:
 			# new selection is occupied but moving to occupied square not implemented
-			selected_square = null
+			selected_square = square
+			_highlight_surrounding_squares(selected_square.grid_position)
 			return
 		
 		if square_previously_hightlighted: 

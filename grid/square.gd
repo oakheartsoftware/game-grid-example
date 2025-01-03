@@ -46,7 +46,7 @@ func clear_leech() -> void:
 func _handle_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if not event is InputEventMouseButton:
 		# Event is not related to the mouse, ignore it
-		return 
+		return
 	
 	# Safely casting the event so that we can see the methods and properties in the editor
 	var mouse_button_event: InputEventMouseButton = event as InputEventMouseButton
